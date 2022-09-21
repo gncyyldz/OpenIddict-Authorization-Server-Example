@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIddict.AuthorizationServer", "AuthorizationServer\OpenIddict.AuthorizationServer\OpenIddict.AuthorizationServer.csproj", "{F205E567-FE4C-4411-816A-A1D3ABABFB2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7641B09-22C7-4E31-A36F-7F54F34CE79D}
+	EndGlobalSection
+EndGlobal
