@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIddict.AuthorizationServer", "AuthorizationServer\OpenIddict.AuthorizationServer\OpenIddict.AuthorizationServer.csproj", "{F205E567-FE4C-4411-816A-A1D3ABABFB2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIdDict.API1", "API1\OpenIdDict.API1\OpenIdDict.API1.csproj", "{9F41ED67-41CA-49D4-9803-EEC83B02F609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F205E567-FE4C-4411-816A-A1D3ABABFB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F41ED67-41CA-49D4-9803-EEC83B02F609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F41ED67-41CA-49D4-9803-EEC83B02F609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F41ED67-41CA-49D4-9803-EEC83B02F609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F41ED67-41CA-49D4-9803-EEC83B02F609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
