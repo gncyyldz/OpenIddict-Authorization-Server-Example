@@ -30,12 +30,20 @@ namespace OpenIddict.AuthorizationServer.Controllers
                     ClientId = model.ClientId,
                     ClientSecret = model.ClientSecret,
                     DisplayName = model.DisplayName,
+                    RedirectUris = { new("https://localhost:7226/callback/login/local") },
+                    PostLogoutRedirectUris = { new("https://localhost:7226/callback/logout/local") },
                     Permissions =
                     {
                         OpenIddictConstants.Permissions.Endpoints.Token,
+                        OpenIddictConstants.Permissions.Endpoints.Authorization,
+
                         OpenIddictConstants.Permissions.GrantTypes.ClientCredentials,
+                        OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+
                         OpenIddictConstants.Permissions.Prefixes.Scope + "read",
-                        OpenIddictConstants.Permissions.Prefixes.Scope + "write"
+                        OpenIddictConstants.Permissions.Prefixes.Scope + "write",
+
+                        OpenIddictConstants.Permissions.ResponseTypes.Code,
                     }
                 });
                 ViewBag.Message = "Client başarıyla oluşturulmuştur.";

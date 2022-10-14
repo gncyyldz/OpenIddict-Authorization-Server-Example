@@ -1,0 +1,21 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form asp-action="Index" asp-controller="Home">
+    <button>İstek Yap</button>
+</form>
+<form asp-action="Logout" asp-controller="Authentication" method="post">
+    <button class="btn btn-lg btn-danger" type="submit">Sign out</button>
+</form>
+
+<p>
+    @Model
+</p>

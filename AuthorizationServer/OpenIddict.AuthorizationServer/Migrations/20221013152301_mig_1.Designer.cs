@@ -12,7 +12,7 @@ using OpenIddict.AuthorizationServer.Models;
 namespace OpenIddict.AuthorizationServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220921215622_mig_1")]
+    [Migration("20221013152301_mig_1")]
     partial class mig_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

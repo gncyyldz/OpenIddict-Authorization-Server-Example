@@ -22,9 +22,16 @@ builder.Services.AddOpenIddict()
     .AddServer(options =>
     {
         //Token talebinde bulunulacak endpoint'i set ediyoruz.
-        options.SetTokenEndpointUris("/connect/token");
+        options.SetTokenEndpointUris("/connect/token")
+               //Authorization Code talebinde bulunulacak endpoint'i set ediyoruz.
+               .SetAuthorizationEndpointUris("/connect/authorize")
+               //Logout isteði geldiðinde yönlendirilecek endpoint'i set ediyoruz.
+               .SetLogoutEndpointUris("/connect/logout");
         //Akýþ türü olarak Client Credentials Flow'u etkinleþtiriyoruz.
-        options.AllowClientCredentialsFlow();
+        options.AllowClientCredentialsFlow()
+               //Authorization Code Flow'u etkileþtiriyoruz.
+               .AllowAuthorizationCodeFlow()
+               .RequireProofKeyForCodeExchange();
         //Signing ve encryption sertifikalarýný ekliyoruz.
         options.AddEphemeralEncryptionKey()
                .AddEphemeralSigningKey()
@@ -36,7 +43,10 @@ builder.Services.AddOpenIddict()
         //OpenIddict Server servislerini IoC Container'a ekliyoruz.
         options.UseAspNetCore()
                //EnableTokenEndpointPassthrough : OpenID Connect request'lerinin OpenIddict tarafýndan iþlenmesi için gerekli konfigürasyonu saðlar.
-               .EnableTokenEndpointPassthrough();
+               .EnableTokenEndpointPassthrough()
+               //EnableAuthorizationEndpointPassthrough: OpenID Connect request'lerinin Authorization Endpoint için aktifleþtirilmesini saðlar.
+               .EnableAuthorizationEndpointPassthrough()
+               .EnableLogoutEndpointPassthrough();
         //Yetkileri(scope) belirliyoruz.
         options.RegisterScopes("read", "write");
     });

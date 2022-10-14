@@ -12,7 +12,7 @@ namespace OpenIdDict.API1.Controllers
         [Authorize("APolicy")]
         public IActionResult A()
         {
-            return Ok();
+            return Ok("Merhaba A");
         }
 
         [HttpGet("[action]")]

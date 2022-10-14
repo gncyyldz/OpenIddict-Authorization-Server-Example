@@ -1,0 +1,19 @@
+﻿@using Microsoft.Extensions.Primitives
+@using OpenIddict.AuthorizationServer.ViewModels
+@model AuthorizeVM
+<div class="jumbotron">
+    <h1>Yetki Onaylama</h1>
+
+    <p class="lead text-left"><strong>@Model.ApplicationName</strong> uygulamasına erişim yetkisi vermek istiyor musunuz? (Beklenen yetkiler: @Model.Scopes)</p>
+
+    <form asp-controller="Authorization" asp-action="Authorize" method="post">
+        @foreach (var parameter in Context.Request.HasFormContentType ?
+        (IEnumerable<KeyValuePair<string, StringValues>>)Context.Request.Form : Context.Request.Query)
+        {
+            <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+        }
+
+        <input class="btn btn-lg btn-success" name="accept" type="submit" value="Yes" />
+        <input class="btn btn-lg btn-danger" name="deny" type="submit" value="No" />
+    </form>
+</div>
