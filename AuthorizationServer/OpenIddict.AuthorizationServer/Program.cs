@@ -26,7 +26,9 @@ builder.Services.AddOpenIddict()
                //Authorization Code talebinde bulunulacak endpoint'i set ediyoruz.
                .SetAuthorizationEndpointUris("/connect/authorize")
                //Logout isteði geldiðinde yönlendirilecek endpoint'i set ediyoruz.
-               .SetLogoutEndpointUris("/connect/logout");
+               .SetLogoutEndpointUris("/connect/logout")
+               //Kullanýcý bilgilerini edinebilmek için userinfo endpoint'ini set ediyoruz.
+               .SetUserinfoEndpointUris("/connect/userinfo");
         //Akýþ türü olarak Client Credentials Flow'u etkinleþtiriyoruz.
         options.AllowClientCredentialsFlow()
                //Authorization Code Flow'u etkileþtiriyoruz.
@@ -46,7 +48,8 @@ builder.Services.AddOpenIddict()
                .EnableTokenEndpointPassthrough()
                //EnableAuthorizationEndpointPassthrough: OpenID Connect request'lerinin Authorization Endpoint için aktifleþtirilmesini saðlar.
                .EnableAuthorizationEndpointPassthrough()
-               .EnableLogoutEndpointPassthrough();
+               .EnableLogoutEndpointPassthrough()
+               .EnableUserinfoEndpointPassthrough();
         //Yetkileri(scope) belirliyoruz.
         options.RegisterScopes("read", "write");
     });

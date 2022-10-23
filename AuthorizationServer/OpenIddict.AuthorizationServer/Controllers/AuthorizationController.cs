@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Abstractions;
 using OpenIddict.AuthorizationServer.ViewModels;
 using OpenIddict.Server.AspNetCore;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 
@@ -68,7 +70,7 @@ namespace OpenIddict.AuthorizationServer.Controllers
             }
             throw new NotImplementedException("The specified grant type is not implemented.");
         }
-     
+
 
         [HttpGet("~/connect/authorize"), HttpPost("~/connect/authorize")]
         public async Task<IActionResult> Authorize(string accept, string deny)
@@ -89,7 +91,9 @@ namespace OpenIddict.AuthorizationServer.Controllers
             var identity = new ClaimsIdentity(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
             identity.AddClaim(OpenIddictConstants.Claims.Subject, result.Principal.Identity.Name, Destinations.AccessToken);
             identity.AddClaim(JwtRegisteredClaimNames.Aud, "Example-OpenIddict", Destinations.AccessToken, Destinations.IdentityToken);
-            identity.AddClaim("ornek-claim", "ornek claim value", Destinations.AccessToken);
+            identity.AddClaim("ornek-claim", "ornek claim value", Destinations.AccessToken, Destinations.IdentityToken);
+            identity.AddClaim("a", "a value", Destinations.AccessToken, Destinations.IdentityToken);
+            identity.AddClaim("b", "b value", Destinations.AccessToken, Destinations.IdentityToken);
 
             var application = await _applicationManager.FindByClientIdAsync(request.ClientId);
             if (HttpContext.Request.Method == "GET")
@@ -111,11 +115,11 @@ namespace OpenIddict.AuthorizationServer.Controllers
                 {
                     [OpenIddictServerAspNetCoreConstants.Properties.Error] = Errors.InvalidScope
                 }));
-        }  
-        
+        }
+
         [HttpGet("~/connect/logout")]
         public IActionResult Logout() => View();
-     
+
         [ActionName(nameof(Logout)), HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
         public async Task<IActionResult> LogoutPost()
         {
@@ -125,6 +129,22 @@ namespace OpenIddict.AuthorizationServer.Controllers
                 {
                     RedirectUri = "/"
                 });
+        }
+
+        [Authorize(AuthenticationSchemes = OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)]
+        [HttpGet("~/connect/userinfo")]
+        public async Task<IActionResult> Userinfo()
+        {
+            var claimPrincipal = (await HttpContext.AuthenticateAsync(OpenIddictServerAspNetCoreDefaults.AuthenticationScheme)).Principal;
+
+            return Ok(new
+            {
+                Name = claimPrincipal.GetClaim(OpenIddictConstants.Claims.Subject),
+                Aud = claimPrincipal.GetClaim(OpenIddictConstants.Claims.Audience),
+                A = claimPrincipal.GetClaim("a"),
+                B = claimPrincipal.GetClaim("b"),
+                OrnekClaim = claimPrincipal.GetClaim("ornek-claim"),
+            });
         }
     }
 }
